@@ -1,9 +1,10 @@
 const { ApolloServer } = require('apollo-server-express');
 const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
 const dotenv = require('dotenv');
-dotenv.config();
 const express = require('express');
 const http = require('http');
+
+dotenv.config();
 
 const {typeDefs,resolvers} = require('./photos');
 

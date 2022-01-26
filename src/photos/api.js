@@ -8,7 +8,7 @@ class UnspashAPI {
             fetch: nodeFetch
         });
 
-    };
+    }
     //restructuring image.
 
     async structureImage (result) {
@@ -17,7 +17,7 @@ class UnspashAPI {
             link:result['links']['download'],
             url:result['urls']['full']
         }
-    };
+    }
 
     //restructuring user.
 
@@ -26,7 +26,7 @@ class UnspashAPI {
             ...result,
             profile_image:result['profile_image'] ? result['profile_image']['medium']: null
         }
-    };
+    }
 
     //getting the photos.
 
@@ -53,7 +53,7 @@ class UnspashAPI {
     
         });
     
-    };
+    }
     //searching for photos.
 
     async searchPhotos(key,page,perPage,orientation){
@@ -84,28 +84,7 @@ class UnspashAPI {
 
         });
         
-    };
-
-    //getting an image.
-
-    async getImage(photoId){
-
-        let result = await this.api.photos.get({photoId})
-        .catch(console.log);
-
-        //error checking
-        if(result.errors) throw new Error(result.errors[0]);
-
-        let image = this.structureImage.bind(this,result['response']);
-
-        let user = this.structureUser.bind(this,result['response']['user']);
-
-        return {
-            image,
-            user
-        };
-
     }
-};
+}
 
 module.exports = UnspashAPI;

@@ -38,8 +38,6 @@ const typeDefs = gql`
         getPhotos(page:Int!,perPage:Int!):[ImageResponse!]!
         searchPhotos(key:String!,page:Int!,perPage:Int!,orientation:String!):[ImageResponse]!
         fetchImage(photoId:String):ImageResponse
-        getUserDetails(username:String): User
-        getUserPhotos(username: String,page:Int!,perPage:Int!,orientation:String!): [ImageResponse!]!
     }
 `;
 
