@@ -1,12 +1,11 @@
-const unsplash = require('unsplash-js');
+const unsplash = require('unsplash-js')
 const nodeFetch = require('node-fetch')
 class UnspashAPI {
     constructor(){
-        console.log(process.env.UNSPLASH_ACCESS_KEY)
         this.api = unsplash.createApi({
             accessKey:process.env.UNSPLASH_ACCESS_KEY,
             fetch: nodeFetch
-        });
+        })
 
     }
     //restructuring image.
@@ -35,23 +34,23 @@ class UnspashAPI {
         let result = await this.api.photos.list({
             page,
             perPage
-        }).catch(console.log);
+        }).catch(console.log)
     
         //error checking
-        if(result.errors) throw new Error(result.errors[0]);
+        if(result.errors) throw new Error(result.errors[0])
     
         return result.response['results'].map((photo) => {
     
-            let image = this.structureImage.bind(this,photo);
+            let image = this.structureImage.bind(this,photo)
     
-            let user = this.structureUser.bind(this,photo['user']);
-    
+            let user = this.structureUser.bind(this,photo['user'])
+            
             return {
                 image,
                 user
-            };
+            }
     
-        });
+        })
     
     }
     //searching for photos.
@@ -65,26 +64,31 @@ class UnspashAPI {
             perPage,
             orientation,
         })
-        .catch(console.log);
+        .catch(console.log)
 
         //error checking
-        if(result.errors) throw new Error(result.errors[0]);
+        if(result.errors) throw new Error(result.errors[0])
 
-        return result['response']['results'].map((photo) => {
+        const response = {
+            results: result['response']['results'].map((photo) => {
 
 
-            let image = this.structureImage.bind(this,photo);
+            let image = this.structureImage.bind(this,photo)
 
-            let user = this.structureUser.bind(this,photo['user']);
+            let user = this.structureUser.bind(this,photo['user'])
 
             return {
                 image,
                 user
             }
 
-        });
+        }),
+        total: result['response']['total'],
+        total_pages: result['response']['total_pages']
+    }
+    return response
         
     }
 }
 
-module.exports = UnspashAPI;
+module.exports = UnspashAPI

@@ -1,4 +1,4 @@
-const UnspashAPI = require('./api');
+const UnspashAPI = require('./api')
 
 let resolvers = {
     Query:{
@@ -7,6 +7,6 @@ let resolvers = {
         fetchImage:(_,{photoId}) => new UnspashAPI().getImage(photoId),
         
     }
-};
+}
 
-module.exports = resolvers;
+module.exports = resolvers

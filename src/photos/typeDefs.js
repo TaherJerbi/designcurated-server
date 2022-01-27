@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server-express')
 
 
 const typeDefs = gql`
@@ -13,9 +13,14 @@ const typeDefs = gql`
     
     type ImageResponse {
         image:Image,
-        user:User
+        user:User,
     }
-
+    
+    type SearchResponse {
+        results: [ImageResponse!]!
+        total: Int!
+        total_pages: Int!
+    }
     type Link {
         self:String!
         photos:String!
@@ -36,10 +41,10 @@ const typeDefs = gql`
 
     type Query {
         getPhotos(page:Int!,perPage:Int!):[ImageResponse!]!
-        searchPhotos(key:String!,page:Int!,perPage:Int!,orientation:String!):[ImageResponse]!
+        searchPhotos(key:String!,page:Int!,perPage:Int!,orientation:String!):SearchResponse
         fetchImage(photoId:String):ImageResponse
     }
-`;
+`
 
 
-module.exports = typeDefs;
+module.exports = typeDefs
